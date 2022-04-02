@@ -3,6 +3,8 @@ package me.apon.lemon.core;
 import android.os.Handler;
 import android.os.Looper;
 
+import java.net.Socket;
+
 /**
  * Created by yaopeng(aponone@gmail.com) on 2018/11/1.
  */
@@ -24,11 +26,11 @@ public class Schedulers {
         mResponseHandler.post(runnable);
     }
 
-    public void connectSuccess(final ConnectHandler connectHandler){
+    public void connectSuccess(final ConnectHandler connectHandler, final Socket socket){
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                connectHandler.connectSuccess();
+                connectHandler.connectSuccess(socket);
             }
         };
 

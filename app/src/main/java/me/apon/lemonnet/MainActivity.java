@@ -1,19 +1,18 @@
 package me.apon.lemonnet;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import java.net.Socket;
 
-
+import me.apon.lemon.Lemon;
 import me.apon.lemon.core.ConnectHandler;
 import me.apon.lemon.core.Disposable;
-import me.apon.lemon.Lemon;
 import me.apon.lemon.core.MessageHandler;
 import me.apon.lemon.core.SocketClient;
-import me.apon.lemon.protocols.FrameProtocols;
 import me.apon.lemon.protocols.TextProtocols;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         SocketClient client = new SocketClient.Builder()
-                .ip("120.78.175.94")
-                .port(7272)
+                .ip("10.10.100.254")
+                .port(8899)
                 .setKeepAlive(true)
                 .build();
         String pingData = "{\"type\":\"ping-yaopeng\"}";
@@ -42,10 +41,11 @@ public class MainActivity extends AppCompatActivity {
         lemon.onConnect(new ConnectHandler() {
 
             @Override
-            public void connectSuccess() {
+            public void connectSuccess(Socket socket) {
                 Log.d(TAG,"===连接成功===");
                 lemon.send("连接成功-进入100房间-");
                 Toast.makeText(MainActivity.this, "连接成功!", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "connectSuccess: "+socket.getInetAddress().toString() );
             }
 
             @Override

@@ -1,5 +1,6 @@
 package me.apon.lemon.core;
 
+import java.net.Socket;
 import java.util.List;
 
 /**
@@ -37,8 +38,8 @@ public  class ConnectHandlerWrap implements ConnectHandler,Disposable{
     }
 
     @Override
-    public void connectSuccess() {
-        connectHandler.connectSuccess();
+    public void connectSuccess(Socket socket) {
+        connectHandler.connectSuccess(socket);
     }
 
     @Override
